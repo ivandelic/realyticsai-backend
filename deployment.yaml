@@ -1,0 +1,55 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: tesla-backend-powerplant-service
+  labels:
+    app: tesla-backend-powerplant
+spec:
+  type: LoadBalancer
+  selector:
+    app: tesla-backend-powerplant
+  ports:
+    -
+      port: 80
+      targetPort: 8080
+      name: http
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: tesla-backend-powerplant-deployment
+  labels:
+    app: tesla-backend-powerplant
+spec:
+  selector:
+    matchLabels:
+      app: tesla-backend-powerplant
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tesla-backend-powerplant
+        version: v1
+    spec:
+      containers:
+        -
+          name: tesla-backend-powerplant
+          image: 'eu-frankfurt-1.ocir.io/oraseemeaceeociworkshop/ivandelic/hep/tesla-backend-powerplant:latest'
+          imagePullPolicy: Always
+          ports:
+            -
+              containerPort: 8080
+          env:
+            - name: JAVAX_SQL_DATASOURCE_TESLA_dash_POWERPLANT_dash_REGISTRY_dash_ORCL_dash_DS_DATASOURCE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: username
+            - name: JAVAX_SQL_DATASOURCE_TESLA_dash_POWERPLANT_dash_REGISTRY_dash_ORCL_dash_DS_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dbsecret
+                  key: password
+      imagePullSecrets:
+        -
+          name: ocirsecret

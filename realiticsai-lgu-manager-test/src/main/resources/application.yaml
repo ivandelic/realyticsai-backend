@@ -1,0 +1,11 @@
+server:
+    port: 8080
+javax:
+    sql:
+        DataSource:
+            lgu-manager-h2-ds:
+                dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+                dataSource:
+                    url: jdbc:h2:~/RealyticsAI;MODE=Oracle
+                    user: sa
+                    password: ""
