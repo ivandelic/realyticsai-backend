@@ -13,7 +13,7 @@ WORKDIR /realyticsai
 ENV TNS_ADMIN="/wallet"
 ENV JAVAX_SQL_DATASOURCE_LGU_dash_MANAGER_dash_ORCL_dash_DS_DATASOURCE_USER=""
 ENV JAVAX_SQL_DATASOURCE_LGU_dash_MANAGER_dash_ORCL_dash_DS_DATASOURCE_PASSWORD=""
-COPY --from=build /realiticsai/realiticsai-lgu-manager-test/target/realiticsai-lgu-manager-test.jar ./
-COPY --from=build /realiticsai/realiticsai-lgu-manager-test/target/libs ./libs
+COPY --from=build /realyticsai/realiticsai-lgu-manager-test/target/realiticsai-lgu-manager-test.jar ./
+COPY --from=build /realyticsai/realiticsai-lgu-manager-test/target/libs ./libs
 CMD ["java", "-jar", "realiticsai-lgu-manager-test.jar"]
 EXPOSE 8080
