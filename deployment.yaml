@@ -1,13 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: tesla-backend-powerplant-service
+  name: realiticsai-lgu-manager-service
   labels:
-    app: tesla-backend-powerplant
+    app: realiticsai-lgu-manager
 spec:
   type: LoadBalancer
   selector:
-    app: tesla-backend-powerplant
+    app: realiticsai-lgu-manager
   ports:
     -
       port: 80
@@ -17,35 +17,35 @@ spec:
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: tesla-backend-powerplant-deployment
+  name: realiticsai-lgu-manager-deployment
   labels:
-    app: tesla-backend-powerplant
+    app: realiticsai-lgu-manager
 spec:
   selector:
     matchLabels:
-      app: tesla-backend-powerplant
+      app: realiticsai-lgu-manager
   replicas: 1
   template:
     metadata:
       labels:
-        app: tesla-backend-powerplant
+        app: realiticsai-lgu-manager
         version: v1
     spec:
       containers:
         -
-          name: tesla-backend-powerplant
-          image: 'eu-frankfurt-1.ocir.io/oraseemeaceeociworkshop/ivandelic/hep/tesla-backend-powerplant:latest'
+          name: realiticsai-lgu-manager
+          image: 'eu-frankfurt-1.ocir.io/oraseemeaceeociworkshop/ivandelic/realiticsai/realiticsai-lgu-manager:latest'
           imagePullPolicy: Always
           ports:
             -
               containerPort: 8080
           env:
-            - name: JAVAX_SQL_DATASOURCE_TESLA_dash_POWERPLANT_dash_REGISTRY_dash_ORCL_dash_DS_DATASOURCE_USER
+            - name: JAVAX_SQL_DATASOURCE_LGU_dash_MANAGER_dash_ORCL_dash_DS_DATASOURCE_USER
               valueFrom:
                 secretKeyRef:
                   name: dbsecret
                   key: username
-            - name: JAVAX_SQL_DATASOURCE_TESLA_dash_POWERPLANT_dash_REGISTRY_dash_ORCL_dash_DS_DATASOURCE_PASSWORD
+            - name: JAVAX_SQL_DATASOURCE_LGU_dash_MANAGER_dash_ORCL_dash_DS_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: dbsecret
