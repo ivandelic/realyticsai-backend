@@ -34,7 +34,7 @@ spec:
       containers:
         -
           name: realiticsai-lgu-manager
-          image: 'eu-frankfurt-1.ocir.io/oraseemeaceeociworkshop/ivandelic/realiticsai/realiticsai-lgu-manager:latest'
+          image: 'eu-frankfurt-1.ocir.io/oraseemeaceeociworkshop/ivandelic/realyticsai/realiticsai-lgu-manager:latest'
           imagePullPolicy: Always
           ports:
             -
